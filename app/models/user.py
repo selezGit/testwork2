@@ -7,6 +7,8 @@ from sqlalchemy_utils import EmailType
 
 class User(Base):
     __tablename__ = 'users'
+    __table_args__ = {'extend_existing': True}
+
     id = Column(
         'id',
         VARCHAR(length=36),
