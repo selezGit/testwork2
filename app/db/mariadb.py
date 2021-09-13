@@ -22,7 +22,7 @@ Base = declarative_base()
 
 
 def init_db():
-    from models import phone_book, user  # noqa
+    import models  # noqa
 
     Base.metadata.create_all(engine)
 
