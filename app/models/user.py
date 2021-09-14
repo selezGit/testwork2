@@ -1,11 +1,11 @@
 import uuid
 
-from db import Base
+from db import Model
 from sqlalchemy import VARCHAR, Column, String
 from sqlalchemy_utils import EmailType
 
 
-class User(Base):
+class User(Model):
     __tablename__ = 'users'
     __table_args__ = {'extend_existing': True}
 

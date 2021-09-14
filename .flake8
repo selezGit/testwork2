@@ -1,6 +1,7 @@
 [flake8]
 exclude =
     .git, .env, env, venv, .venv,
+    template!.py, views, local.py
 
 ignore =
     D107, D106, D105, D104, D103, D102, D101, D100, D205, D400, D401, 

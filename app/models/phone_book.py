@@ -1,11 +1,11 @@
 import uuid
 
-from db import Base
+from db import Model
 from sqlalchemy import VARCHAR, Column, Date, ForeignKey, String, UniqueConstraint
 from sqlalchemy_utils import PhoneNumberType
 
 
-class PhoneBook(Base):
+class PhoneBook(Model):
     __tablename__ = 'phone_book'
     __table_args__ = (
         UniqueConstraint(
