@@ -18,18 +18,10 @@ engine = create_engine(db_url)
 
 Session = sessionmaker(engine, expire_on_commit=False, class_=Session)
 
-Base = declarative_base()
+Model = declarative_base()
 
 
 def init_db():
     import models  # noqa
 
-    Base.metadata.create_all(engine)
-
-
-def get_db() -> Session:
-    db = Session()
-    try:
-        yield db
-    finally:
-        db.close()
+    Model.metadata.create_all(engine)
