@@ -1,5 +1,9 @@
 from typing import Type
 
+
+from werkzeug.exceptions import NotFound
+
+
 from .repository import BaseRepository
 
 
@@ -29,3 +33,9 @@ class BaseService:
 
     def all(self, **filters):
         return self._repository.all(**filters)
+
+    def get_instance(self, uid):
+        instance = self.get_by_id(uid)
+        if not instance:
+            raise NotFound()
+        return instance

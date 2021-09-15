@@ -14,16 +14,10 @@ class BaseRepository:
         self.session = Session()
 
     def get_by_id(self, uid: str):
-        return self._get_one_by_query(
-            self.session.query(self.model).filter(
-                self._get_model_id_field() == uid
-            )
-        )
+        return self._get_one_by_query(self.session.query(self.model).filter(self._get_model_id_field() == uid))
 
     def delete_by_id(self, uid: str):
-        self.session.query(self.model).filter(
-            self._get_model_id_field() == uid
-        ).delete()
+        self.session.query(self.model).filter(self._get_model_id_field() == uid).delete()
 
     def session_commit(self):
         try:
@@ -33,12 +27,7 @@ class BaseRepository:
             raise err
 
     def exists(self, **filters) -> bool:
-        return (
-            self.session.query(self._get_model_id_field())
-            .filter_by(**filters)
-            .first()
-            is not None
-        )
+        return self.session.query(self._get_model_id_field()).filter_by(**filters).first() is not None
 
     def insert(self, **data) -> Model:
         instance = self.model(**data)
