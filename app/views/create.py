@@ -3,17 +3,17 @@ from PyQt5 import QtWidgets
 from PyQt5.uic import loadUi
 from services.exceptions import DuplicateEmailError, DuplicateUserError
 
-from views.profile import FillProfileScreen
-
 
 class CreateAccScreen(ViewMixin):
+    title = 'register'
+
     def __init__(self):
         super(CreateAccScreen, self).__init__()
         loadUi('styles/createacc.ui', self)
         self.passwordfield.setEchoMode(QtWidgets.QLineEdit.Password)
         self.confirmpasswordfield.setEchoMode(QtWidgets.QLineEdit.Password)
         self.signup.clicked.connect(self.signupfn)
-        self.back.clicked.connect(self.login_onClick)
+        self.back.clicked.connect(self.login_window)
 
     def signupfn(self):
         login = self.loginfield.text()
@@ -30,9 +30,7 @@ class CreateAccScreen(ViewMixin):
             if self.check_passwords_fields(password, confirmpassword):
                 try:
                     self.user_service.register(login=login, email=email, password=password)
-                    self.cams = FillProfileScreen()
-                    self.cams.show()
-                    self.close()
+                    self.profile_window()
                 except DuplicateUserError:
                     self.error.setText(f'Login {login} exists')
 
