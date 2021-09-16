@@ -2,29 +2,25 @@ import sys
 
 from core.mixins import ViewMixin
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication
 from PyQt5.uic import loadUi
 from services.exceptions import UserNotFoundError
 
 
-class LoginScreen(QMainWindow, ViewMixin):
+class LoginScreen(ViewMixin):
+    title = 'login'
+
     def __init__(self):
         super().__init__()
-        self.title = 'App'
-        self.top = 300
-        self.left = 150
-        self.width = 1200
-        self.height = 800
         self.InitUI()
 
     def InitUI(self):
         loadUi('styles/login.ui', self)
         self.setWindowTitle(self.title)
-        self.setGeometry(self.top, self.left, self.width, self.height)
         self.login.clicked.connect(self.loginfn)
-        self.create.clicked.connect(self.create_onClick)
+        self.create.clicked.connect(self.create_window)
         self.showpass.clicked.connect(self.change_password_mode)
-        self.recover.clicked.connect(self.recover_onClick)
+        self.recover.clicked.connect(self.recover_window)
         self.show()
 
     def change_password_mode(self):

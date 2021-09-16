@@ -5,6 +5,8 @@ from core.mixins import ViewMixin
 
 
 class ChangePassScreen(ViewMixin):
+    title = 'change'
+
     def __init__(self, user: User):
         super(ChangePassScreen, self).__init__()
         self._user = user
@@ -12,7 +14,7 @@ class ChangePassScreen(ViewMixin):
         self.passwordfield.setEchoMode(QtWidgets.QLineEdit.Password)
         self.confirmpasswordfield.setEchoMode(QtWidgets.QLineEdit.Password)
         self.changepass.clicked.connect(self.recoverfn)
-        self.back.clicked.connect(self.recover_onClick)
+        self.back.clicked.connect(self.recover_window)
 
     def recoverfn(self):
         password = self.passwordfield.text()

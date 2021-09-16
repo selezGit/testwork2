@@ -1,4 +1,4 @@
-
+from models import User
 from PyQt5.QtWidgets import QDialog
 from services import ContactService, UserService
 
@@ -7,31 +7,50 @@ class ViewMixin(QDialog):
     user_service = UserService()
     contact_service = ContactService()
 
-    def login_onClick(self):
+    def login_window(self):
         from views import LoginScreen  # noqa
 
         self.cams = LoginScreen()
+        self.cams.setWindowTitle(self.cams.title)
         self.cams.show()
         self.close()
 
-    def create_onClick(self):
+    def create_window(self):
         from views import CreateAccScreen  # noqa
 
         self.cams = CreateAccScreen()
+        self.cams.setWindowTitle(self.cams.title)
         self.cams.show()
         self.close()
 
-    def recover_onClick(self):
+    def recover_window(self):
         from views import RecoverAccScreen  # noqa
 
         self.cams = RecoverAccScreen()
+        self.cams.setWindowTitle(self.cams.title)
+        self.cams.show()
+        self.close()
+
+    def changepass_window(self, user: User):
+        from views import ChangePassScreen  # noqa
+
+        self.cams = ChangePassScreen(user)
+        self.cams.setWindowTitle(self.cams.title)
+        self.cams.show()
+        self.close()
+
+    def fillprofile_window(self):
+        from views import ProfileScreen  # noqa
+
+        self.cams = ProfileScreen()
+        self.cams.setWindowTitle(self.cams.title)
         self.cams.show()
         self.close()
 
     def check_fields(self, **kwargs) -> bool:
         not_exists = [key for key, value in kwargs.items() if not value]
         if not_exists:
-            self.error.setText(f'Please input: {", ".join(not_exists)}')
+            self.error.setText(f'Please input: {" ".join(not_exists)}')
             return False
         return True
 
