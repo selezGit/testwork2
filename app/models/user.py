@@ -20,7 +20,7 @@ class User(Model):
     )
     login = Column(String(length=255), unique=True, nullable=False)
     password = Column(String(length=255), nullable=False)
-    email = Column(EmailType(length=255), unique=True)
+    email = Column(EmailType(length=255), unique=True, nullable=False)
 
     contact = relationship('Contact', back_populates='user')
 
